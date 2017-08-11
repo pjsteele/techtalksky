@@ -1,4 +1,4 @@
-# KY Tech Talk. Sample 1
+# Sample 1
 
 _Assuming you have Node installed._
 
