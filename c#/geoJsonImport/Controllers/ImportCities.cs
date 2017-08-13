@@ -17,41 +17,67 @@ namespace Importer.Controllers
         {
             try
             {
-                Database db = new Database("DBConnect"); 
+                Database db = new Database("DBConnect");
 
-                // Open the GeoJSON file and read as is
+                // Use a different list of cities to get more data
                 FileInfo fileInfo = new FileInfo("../../../../data/geoJson/us_cities.geojson");
                 StreamReader reader = fileInfo.OpenText();
                 string json = reader.ReadToEnd();
                 reader.Close();
 
-                // Convert the Json Text into an object
+                Dictionary<string, int> populations = new Dictionary<string, int>();
                 FeatureCollection featureCollection = JsonConvert.DeserializeObject<FeatureCollection>(json);
                 foreach (Feature feature in featureCollection.Features)
                 {
-                    string fieldsSql = "";
-                    string valuesSql = "";
-
-                    foreach (var property in feature.Properties)
+                    string key = getKey(feature.Properties["ST"] , feature.Properties["AREANAME"]);
+                    if (!populations.ContainsKey(key))
                     {
-                        fieldsSql += "[" + property.Key + "], ";
-                        valuesSql += "'" + property.Value + "', ";
+                        populations.Add(key, Convert.ToInt32(feature.Properties["POP2000"]));
                     }
+                }
 
-                    // Create the SQL command. Append the geography and geometry too
-                    string sql = "Insert into cities (" + fieldsSql + "[geography], [geometry]) ";
-                    sql += "values(" + valuesSql + "\r\n";
 
-                    Point point = feature.Geometry as Point;
-                    sql += " geography::STGeomFromText('POINT(" + point.Coordinates.Longitude + "," + point.Coordinates.Longitude + "'), 4326), \r\n";
-                    sql += " geometry::STGeomFromText('POINT(" + point.Coordinates.Longitude + "," + point.Coordinates.Longitude + "'), 4326) ";
-                    sql += ")";
+                // Open the GeoJSON file and read as is
+                fileInfo = new FileInfo("../../../../data/geoJson/cities.geojson");
+                reader = fileInfo.OpenText();
+                json = reader.ReadToEnd();
+                reader.Close();
+
+                // Convert the Json Text into an object
+                featureCollection = JsonConvert.DeserializeObject<FeatureCollection>(json);
+                foreach (Feature feature in featureCollection.Features)
+                {
+                    string key = getKey(feature.Properties["state"], feature.Properties["city"]);
+                    if (populations.ContainsKey(key))
+                    {
+                        string sql = "Insert into cities ([city], [state], [population], [geography], [geometry]) values(";
+
+                        sql += "'" + feature.Properties["city"].ToString().Replace("'", "''") + "',";
+                        sql += "'" + feature.Properties["state"] + "',";
+                        sql += populations[key] + ",\r\n";
+
+                        Point point = feature.Geometry as Point;
+                        sql += " geography::STGeomFromText('POINT(" + point.Coordinates.Longitude + " " + point.Coordinates.Latitude + ")', 4326), \r\n";
+                        sql += " geometry::STGeomFromText('POINT(" + point.Coordinates.Longitude + " " + point.Coordinates.Latitude + ")', 4326) ";
+                        sql += ")";
+
+                        db.Execute(sql);
+                    }
                 }
             }
             catch (Exception exception)
             {
                 throw exception ;
             }
+        }
+
+        private string getKey(object state, object city)
+        {
+            string key = state.ToString() + "-" + city.ToString();
+            key = key.Replace(" ", "-");
+            key = key.ToUpper();
+
+            return key;
         }
     }
 }

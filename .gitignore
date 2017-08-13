@@ -1,5 +1,7 @@
 c#/.vs/*/*
+c#/.vs/geoJsonImport/v14/.suo
 c#/geoJsonImport/bin/*/*
 c#/geoJsonImport/obj/*/*
 c#/packages/*/*
 data/mdf/*
+
