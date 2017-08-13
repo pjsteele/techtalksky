@@ -11,7 +11,8 @@ namespace Importer
     {
         static void Main(string[] args)
         {
-            (new ImportCities()).run();
+            //(new ImportCities()).run();
+            (new ImportStates()).run();
         }
     }
 }
