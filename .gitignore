@@ -1,0 +1,4 @@
+c#/.vs;
+c#/geoJsonImport/bin/*/*
+c#/geoJsonImport/obj/*/*
+c#/packages/*/*
