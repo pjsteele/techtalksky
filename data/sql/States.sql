@@ -1,4 +1,3 @@
-
 CREATE TABLE [dbo].[States](
 	[name] [varchar](255) NOT NULL,
 	[abbreviation] [varchar](255) NOT NULL,
@@ -10,5 +9,7 @@ CREATE TABLE [dbo].[States](
 	[landarea] [varchar](255) NOT NULL,
 	[houseseats] [varchar](255) NOT NULL,
 	[statehood] [varchar](255) NOT NULL,
-	[group] [varchar](255) NOT NULL
-)
+	[group] [varchar](255) NOT NULL,
+	[geography] [geography] NOT NULL,
+	[geometry] [geometry] NOT NULL
+) 

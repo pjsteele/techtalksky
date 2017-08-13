@@ -1,4 +1,5 @@
-﻿using GeoJSON.Net.Feature;
+﻿using GeoJSON.Net;
+using GeoJSON.Net.Feature;
 using GeoJSON.Net.Geometry;
 using Newtonsoft.Json;
 using PetaPoco;
@@ -28,24 +29,22 @@ namespace Importer.Controllers
                     reader.Close();
 
                     // Convert the Json Text into an object
-                    FeatureCollection featureCollection = JsonConvert.DeserializeObject<FeatureCollection>(json);
-                    foreach (Feature feature in featureCollection.Features)
+                    Feature feature = JsonConvert.DeserializeObject<Feature>(json);
+                    string fieldsSQL = "";
+                    string valuesSQL = "";
+                    foreach (var property in feature.Properties)
                     {
-                        string fieldsSQL = "";
-                        string valuesSQL = "";
-                        foreach (var property in feature.Properties)
-                        {
-                            fieldsSQL += "[" + property.Key + "],";
-                            valuesSQL += "'" + property.Value.ToString().Replace("'"," ") + "',";
-                        }
-
-                        string geomString = createGeomString(feature);
-
-                        string sql = "Insert into states ( " + fieldsSQL + "[geography], [geometry]) values(" + valuesSQL;
-                        sql += geomString + "," + geomString + ")";
-
-                        db.Execute(sql);
+                        fieldsSQL += "[" + property.Key + "],";
+                        valuesSQL += "'" + property.Value.ToString().Replace("'"," ") + "',";
                     }
+
+                    string geomString = createGeomString(feature);
+
+                    string sql = "Insert into states ( " + fieldsSQL + "[geography], [geometry]) values(" + valuesSQL;
+                    sql += "geography::STGeomFromText('" + geomString + "', 4326), ";
+                    sql += "geometry::STGeomFromText('" + geomString + "', 4326))";
+
+                    db.Execute(sql);
                 }
             }
             catch (Exception exception)
@@ -56,9 +55,60 @@ namespace Importer.Controllers
 
         private string createGeomString(Feature feature)
         {
-            MultiPolygon polygons = feature.Geometry as MultiPolygon;
+            try
+            {
+                string geom = "MULTIPOLYGON(";
 
-            return "";
+                var debug = "";
+                switch (feature.Geometry.Type)
+                {
+                    case GeoJSONObjectType.Polygon:
+                        debug = "";
+                        break;
+                    case GeoJSONObjectType.MultiPolygon:
+                        debug = "";
+                        break;
+                    default:
+                        debug = "";
+                        break;
+                }
+
+                MultiPolygon multiPolygon = feature.Geometry as MultiPolygon;
+                bool first0 = true;
+                foreach (var coords0 in multiPolygon.Coordinates)
+                {
+                    if (!first0) { geom += ", "; }
+                    geom += "(";
+
+                    bool first1 = true;
+                    foreach (var coords1 in coords0.Coordinates)
+                    {
+                        if (!first1) { geom += ", "; }
+                        geom += "(";
+
+                        bool first2 = true;
+                        foreach (var coords2 in coords1.Coordinates)
+                        {
+                            if (!first2) { geom += ","; }
+                            geom += coords2.Longitude + " " + coords2.Latitude;
+                            first2 = false;
+                        }
+
+                        first1 = false;
+                        geom += ")";
+                    }
+                    first0 = false;
+                    geom += ")";
+                }
+
+                geom += ")";
+
+                return geom;
+            }
+            catch (Exception exception)
+            {
+                throw exception;
+            }
         }
     }
 }
