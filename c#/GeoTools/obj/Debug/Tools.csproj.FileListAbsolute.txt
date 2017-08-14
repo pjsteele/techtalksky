@@ -1,0 +1,9 @@
+C:\Dev\repos\github\techtalksky\c#\GeoTools\obj\Debug\Tools.csprojResolveAssemblyReference.cache
+C:\Dev\repos\github\techtalksky\c#\GeoTools\bin\Debug\GeoJSON.Net.dll
+C:\Dev\repos\github\techtalksky\c#\GeoTools\bin\Debug\Newtonsoft.Json.dll
+C:\Dev\repos\github\techtalksky\c#\GeoTools\bin\Debug\Newtonsoft.Json.xml
+C:\Dev\repos\github\techtalksky\c#\GeoTools\bin\Debug\GeoTools.exe.config
+C:\Dev\repos\github\techtalksky\c#\GeoTools\bin\Debug\GeoTools.exe
+C:\Dev\repos\github\techtalksky\c#\GeoTools\bin\Debug\GeoTools.pdb
+C:\Dev\repos\github\techtalksky\c#\GeoTools\obj\Debug\GeoTools.exe
+C:\Dev\repos\github\techtalksky\c#\GeoTools\obj\Debug\GeoTools.pdb

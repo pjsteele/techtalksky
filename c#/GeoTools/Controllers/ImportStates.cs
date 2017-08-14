@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Importer.Controllers
+namespace GeoTools.Controllers
 {
     public class ImportStates
     {

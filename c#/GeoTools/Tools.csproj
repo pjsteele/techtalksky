@@ -7,8 +7,8 @@
     <ProjectGuid>{FF74D055-833D-442C-A1DF-FB5AFA5060FA}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Import</RootNamespace>
-    <AssemblyName>geoJsonImport</AssemblyName>
+    <RootNamespace>GeoTools</RootNamespace>
+    <AssemblyName>GeoTools</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\ExportEclipseAndStates.cs" />
     <Compile Include="Controllers\ImportEclipsePath.cs" />
     <Compile Include="Controllers\ImportStates.cs" />
     <Compile Include="Controllers\ImportCities.cs" />

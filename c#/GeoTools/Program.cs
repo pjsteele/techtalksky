@@ -1,11 +1,11 @@
-﻿using Importer.Controllers;
+﻿using GeoTools.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Importer
+namespace GeoTools
 {
     class Program
     {
@@ -13,7 +13,9 @@ namespace Importer
         {
             //(new ImportCities()).run();
             //(new ImportStates()).run();
-            (new ImportEclipsePath()).run();
+            //(new ImportEclipsePath()).run();
+
+            (new ExportEclipseAndStates()).run();
         }
     }
 }
