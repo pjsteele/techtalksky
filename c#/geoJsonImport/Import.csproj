@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\ImportEclipsePath.cs" />
     <Compile Include="Controllers\ImportStates.cs" />
     <Compile Include="Controllers\ImportCities.cs" />
     <Compile Include="Models\PetaPoco.cs" />

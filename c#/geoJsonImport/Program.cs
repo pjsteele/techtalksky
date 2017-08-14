@@ -12,7 +12,8 @@ namespace Importer
         static void Main(string[] args)
         {
             //(new ImportCities()).run();
-            (new ImportStates()).run();
+            //(new ImportStates()).run();
+            (new ImportEclipsePath()).run();
         }
     }
 }
