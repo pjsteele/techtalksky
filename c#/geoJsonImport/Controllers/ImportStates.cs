@@ -44,7 +44,7 @@ namespace Importer.Controllers
                     sql += "geography::STGeomFromText('" + geomString + "', 4326), ";
                     sql += "geometry::STGeomFromText('" + geomString + "', 4326))";
 
-                    if (geomString != "") { db.Execute(sql); }
+                    db.Execute(sql); 
                 }
             }
             catch (Exception exception)
@@ -67,44 +67,13 @@ namespace Importer.Controllers
                         break;
 
                     case GeoJSONObjectType.MultiPolygon:
-                        geom = "MULTIPOLYGON";
-                        //https://blogs.msdn.microsoft.com/davidlean/2008/10/16/sql-2008-spatial-samples-part-9-of-9-handy-but-obvious-methods/
-                        return "";
+                        buildPolygon(feature.Geometry, ref geom);
+                        geom = "MULTIPOLYGON(" + geom + ")";
                         break;
 
                     default:
                         throw new Exception("Unexpected geometry type");
                 }
-
-                //MultiPolygon multiPolygon = feature.Geometry as MultiPolygon;
-                //bool first0 = true;
-                //foreach (var coords0 in multiPolygon.Coordinates)
-                //{
-                //    if (!first0) { geom += ", "; }
-                //    geom += "(";
-
-                //    bool first1 = true;
-                //    foreach (var coords1 in coords0.Coordinates)
-                //    {
-                //        if (!first1) { geom += ", "; }
-                //        geom += "(";
-
-                //        bool first2 = true;
-                //        foreach (var coords2 in coords1.Coordinates)
-                //        {
-                //            if (!first2) { geom += ","; }
-                //            geom += coords2.Longitude + " " + coords2.Latitude;
-                //            first2 = false;
-                //        }
-
-                //        first1 = false;
-                //        geom += ")";
-                //    }
-                //    first0 = false;
-                //    geom += ")";
-                //}
-
-                //geom += ")";
 
                 return geom;
             }
@@ -117,7 +86,7 @@ namespace Importer.Controllers
         private void buildPolygon(IGeometryObject geometry, ref string value)
         {
             try
-            {
+            {               
                 switch (geometry.Type)
                 {
                     case GeoJSONObjectType.Polygon:
@@ -131,13 +100,18 @@ namespace Importer.Controllers
                             pointsString += coords.Coordinates[i].Longitude + " " + coords.Coordinates[i].Latitude;
                         }
                         pointsString += ")";
-                        if (value != "") { value += ","; }
                         value += pointsString;
                         break;
 
                     case GeoJSONObjectType.MultiPolygon:
-                        // Call again. We have more data to parse
-                        buildPolygon(geometry, ref value);
+                        MultiPolygon multiPolygon = geometry as MultiPolygon;
+                        for (int i = 0; i < multiPolygon.Coordinates.Count; i++)
+                        {
+                            if (i > 0) { value += ","; }
+                            value += "(";
+                            buildPolygon(multiPolygon.Coordinates[i], ref value);
+                            value += ")";
+                        }
                         break;
 
                     default:
