@@ -2,9 +2,10 @@ html, body {
     height: 100%;
 }
 
-.tab-container {
+.main-container {
+  background-color: wheat;
   position: absolute;
-  top:43px;
+  top:0px;
   right: 0;
   bottom: 0;
   left: 0;
