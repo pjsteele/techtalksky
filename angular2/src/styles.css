@@ -3,10 +3,13 @@ html, body {
 }
 
 .tab-container {
-  background-color: brown;
   position: absolute;
-  top:40px;
+  top:43px;
   right: 0;
   bottom: 0;
   left: 0;
+}
+
+agm-map {
+  height: 100%
 }
