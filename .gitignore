@@ -1,5 +1,5 @@
-angular2/node_modules/*
-angular2/package-lock.json
+ng2/node_modules/*
+ng2/package-lock.json
 c#/.vs/*/*
 c#/.vs/Geotools/v14/.suo
 c#/Geotools/bin/*/*
