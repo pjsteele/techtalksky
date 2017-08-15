@@ -1,7 +1,6 @@
 c#/.vs/*/*
-c#/.vs/geoJsonImport/v14/.suo
-c#/geoJsonImport/bin/*/*
-c#/geoJsonImport/obj/*/*
+c#/.vs/Geotools/v14/.suo
+c#/Geotools/bin/*/*
+c#/Geotools/obj/*/*
 c#/packages/*/*
 data/mdf/*
-
