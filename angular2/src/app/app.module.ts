@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AgmCoreModule } from '@agm/core';
+import { AgmCoreModule} from '@agm/core';
 import { TabsModule } from 'ngx-tabs';
 import { AppComponent } from './app.component';
 import { Example1Component } from './example1/example1.component';
