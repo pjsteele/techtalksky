@@ -5,8 +5,8 @@ _Assuming you have Node installed._
 ## Install npm packages
 npm install
 
-## Install node_module ng2-map and typings
-npm install ng2-map @types/google-maps --save
+## Install angular maps
+npm install @agm/core --save
 
 ## Run application 
 ng serve --open

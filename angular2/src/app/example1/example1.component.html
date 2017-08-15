@@ -1,1 +1,3 @@
-<ng2-map center="Louisville, KY" style="min-height:700px" zoom="9"  ></ng2-map>
+<agm-map [latitude]="centerLat" [longitude]="centerLng" [zoom]="centerZoom" style="height:1000px" >
+  <agm-marker [latitude]="lat" [longitude]="lng" title="Howdy All" ></agm-marker>
+</agm-map>

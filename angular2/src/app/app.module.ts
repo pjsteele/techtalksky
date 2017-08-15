@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { Ng2MapModule} from 'ng2-map';
+import { AgmCoreModule } from '@agm/core';
 import { TabsModule } from 'ngx-tabs';
 import { AppComponent } from './app.component';
 import { Example1Component } from './example1/example1.component';
@@ -14,7 +14,9 @@ import { Example2Component } from './example2/example2.component';
   ],
   imports: [
     BrowserModule,
-    Ng2MapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyBCS2tNRE4wd0_3lIsJ-8dtuz9eqWgHahc'}),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBCS2tNRE4wd0_3lIsJ-8dtuz9eqWgHahc'
+    }),
     TabsModule
   ],
   providers: [],
