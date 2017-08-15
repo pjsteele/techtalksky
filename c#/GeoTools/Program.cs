@@ -16,6 +16,7 @@ namespace GeoTools
             //(new ImportEclipsePath()).run();
 
             (new ExportEclipseAndStates()).run();
+            //(new ExportAllStates()).run();
         }
     }
 }

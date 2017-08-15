@@ -18,32 +18,15 @@ namespace GeoTools.Controllers
             try
             {
                 Database db = new Database("DBConnect");
-                var rows = db.Fetch<dynamic>("select name, dbo.geometry2json(geometry) as json from States");
+                var rows = db.Fetch<dynamic>(";exec StatesIntersectEclipseJson");
 
                 FeatureCollection fc = new FeatureCollection();
                 foreach (var row in rows)
                 {
-                    dynamic geoJson = JsonConvert.DeserializeObject(row.json);
-                    string geometryType = geoJson.type;
-                    IGeometryObject geometry = null;
-
-                    switch (geometryType)
-                    {
-                        case "Polygon":
-                            geometry = JsonConvert.DeserializeObject<Polygon>(row.json);
-                            break;
-                        case "MultiPolygon":
-                            geometry = JsonConvert.DeserializeObject<MultiPolygon>(row.json);
-                            break;
-                    }
-
-                    Feature feature = new Feature(geometry);
-                    feature.Properties.Add("name", row.name);
-
-                    fc.Features.Add(feature);    
+                    fc.Features.Add(createFeature(row));    
                 }
 
-                FileInfo fileInfo = new FileInfo("../../../../data/geoJson/EclipseAndStates.geojson");
+                FileInfo fileInfo = new FileInfo("../../../../data/geoJson//exported/eclipseAndStates.geojson");
                 StreamWriter writer = fileInfo.CreateText();
                 string json = JsonConvert.SerializeObject(fc);
                 writer.Write(json);
@@ -53,6 +36,31 @@ namespace GeoTools.Controllers
             {
                 throw exception;
             }
+        }
+
+        private Feature createFeature(dynamic row)
+        {
+            dynamic geoJson = JsonConvert.DeserializeObject(row.json);
+            string geometryType = geoJson.type;
+            IGeometryObject geometry = null;
+
+            switch (geometryType)
+            {
+                case "Polygon":
+                    geometry = JsonConvert.DeserializeObject<Polygon>(row.json);
+                    break;
+                case "MultiPolygon":
+                    geometry = JsonConvert.DeserializeObject<MultiPolygon>(row.json);
+                    break;
+                case "LineString":
+                    geometry = JsonConvert.DeserializeObject<LineString>(row.json);
+                    break;
+            }
+
+            Feature feature = new Feature(geometry);
+            feature.Properties.Add("name", row.name);
+
+            return feature;
         }
     }
 }
