@@ -9,12 +9,13 @@ export class Example1Component implements OnInit {
 
   constructor() {  }
 
-  centerLat: number = 38.25486;
-  centerLng: number = -85.7664;
-  centerZoom:number = 10;
+  centerLat: number = 38.240768;
+  centerLng: number = -85.724907;
+  centerZoom:number = 18;
 
-  lat: number = 38.25486;
-  lng: number = -85.7664;
+  title = "O'Shea's Irish Pub";
+  lat: number = 38.240768;
+  lng: number = -85.724907;
 
   ngOnInit() {
   }
