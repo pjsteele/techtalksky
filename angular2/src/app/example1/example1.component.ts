@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Ng2Map } from 'ng2-map';
 
 @Component({
   selector: 'app-example1',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Example1Component implements OnInit {
 
-  constructor() { }
+  constructor(private _map:Ng2Map) {  }
 
   ngOnInit() {
+    var debug = 0;
   }
 
 }
