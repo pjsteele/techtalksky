@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\ExportPoints100.cs" />
     <Compile Include="Controllers\ExportAllStates.cs" />
     <Compile Include="Controllers\ExportEclipseAndStates.cs" />
     <Compile Include="Controllers\ImportEclipsePath.cs" />

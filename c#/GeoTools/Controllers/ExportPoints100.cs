@@ -11,14 +11,14 @@ using System.Threading.Tasks;
 
 namespace GeoTools.Controllers
 {
-    public class ExportAllStates
+    public class ExportPoints100
     {
         public void run()
         {
             try
             {
                 Database db = new Database("DBConnect");
-                var rows = db.Fetch<dynamic>("select name, capital, population, dbo.geometry2json(geometry) as json from States");
+                var rows = db.Fetch<dynamic>(";exec Build100MileRadius");
 
                 FeatureCollection fc = new FeatureCollection();
                 foreach (var row in rows)
@@ -29,25 +29,22 @@ namespace GeoTools.Controllers
 
                     switch (geometryType)
                     {
-                        case "Polygon":
-                            geometry = JsonConvert.DeserializeObject<Polygon>(row.json);
-                            break;
-                        case "MultiPolygon":
-                            geometry = JsonConvert.DeserializeObject<MultiPolygon>(row.json);
+                        case "Point":
+                            geometry = JsonConvert.DeserializeObject<Point>(row.json);
                             break;
                         default:
                             throw new Exception("Unexpected Geometry Type");
                     }
 
                     Feature feature = new Feature(geometry);
-                    feature.Properties.Add("name", row.name);
-                    feature.Properties.Add("capital", row.capital);
+                    feature.Properties.Add("city", row.city);
+                    feature.Properties.Add("state", row.state);
                     feature.Properties.Add("population", row.population);
 
                     fc.Features.Add(feature);    
                 }
 
-                FileInfo fileInfo = new FileInfo("c:/temp//allStates.geojson");
+                FileInfo fileInfo = new FileInfo("c:/temp//points100.geojson");
                 StreamWriter writer = fileInfo.CreateText();
                 string json = JsonConvert.SerializeObject(fc);
                 writer.Write(json);

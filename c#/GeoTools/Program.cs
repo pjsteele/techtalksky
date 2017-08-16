@@ -11,12 +11,14 @@ namespace GeoTools
     {
         static void Main(string[] args)
         {
+            // Uncomment the process you want to run
+
             //(new ImportCities()).run();
             //(new ImportStates()).run();
             //(new ImportEclipsePath()).run();
-
-            (new ExportEclipseAndStates()).run();
+            //(new ExportEclipseAndStates()).run();
             //(new ExportAllStates()).run();
+            (new ExportPoints100()).run();
         }
     }
 }

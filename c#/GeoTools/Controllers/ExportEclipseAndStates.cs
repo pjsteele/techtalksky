@@ -26,7 +26,7 @@ namespace GeoTools.Controllers
                     fc.Features.Add(createFeature(row));    
                 }
 
-                FileInfo fileInfo = new FileInfo("../../../../data/geoJson//exported/eclipseAndStates.geojson");
+                FileInfo fileInfo = new FileInfo("c:/temp/eclipseAndStates.geojson");
                 StreamWriter writer = fileInfo.CreateText();
                 string json = JsonConvert.SerializeObject(fc);
                 writer.Write(json);
@@ -55,6 +55,8 @@ namespace GeoTools.Controllers
                 case "LineString":
                     geometry = JsonConvert.DeserializeObject<LineString>(row.json);
                     break;
+                default:
+                    throw new Exception("Unexpected Geometry Type");
             }
 
             Feature feature = new Feature(geometry);
