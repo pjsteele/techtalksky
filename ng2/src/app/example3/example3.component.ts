@@ -3,23 +3,23 @@ import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 @Component({
-  selector: 'app-example2',
-  templateUrl: './example2.component.html',
+  selector: 'app-example3',
+  templateUrl: './example3.component.html',
   styles: []
 })
-export class Example2Component implements OnInit {
+export class Example3Component implements OnInit {
 
   constructor(private http: Http) { }
 
   centerLat: number = 34.5133;
   centerLng: number = -94.1629;
   centerZoom:number = 4;
-  markers: object[];
+  geoJson: object;
 
   ngOnInit() {
-    this.http.get('assets/TopCities.json')
+    this.http.get('assets/AllStates.geojson')
     .map( (data)=> {
-      this.markers = data.json();
+      this.geoJson = data.json();
     }).subscribe();
   }
 }
