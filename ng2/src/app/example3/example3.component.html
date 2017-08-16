@@ -2,6 +2,8 @@
   <div style="position:absolute; top:10px; left: 10px; z-index:200" >
     <button type="button" (click)="clear()">Clear</button>
     <button type="button" (click)="loadStates()">Load States</button>
+    <button type="button" (click)="loadEclipsePath()">Load Eclipse Path</button>
+    <button type="button" (click)="loadEclipseStates()">Load Eclipse + States</button>
   </div> 
   <agm-map [latitude]="centerLat" [longitude]="centerLng" [zoom]="centerZoom">
     <agm-data-layer [geoJson]="geoJson"></agm-data-layer>

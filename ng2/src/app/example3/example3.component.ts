@@ -22,9 +22,18 @@ export class Example3Component implements OnInit {
   public clear(): void {
     this.geoJson = null;
   }
+  
   public loadStates(): void {
     this.loadGeoJson('assets/AllStates.geojson');
   }
+
+  public loadEclipsePath(): void {
+    this.loadGeoJson('assets/eclipse.geojson');
+  }
+
+  public loadEclipseStates(): void {
+    this.loadGeoJson('assets/EclipseAndStates.geojson');
+  }  
 
   private loadGeoJson(path: string): void {
     this.http.get(path)
