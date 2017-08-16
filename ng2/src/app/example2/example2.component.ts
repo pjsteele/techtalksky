@@ -20,7 +20,6 @@ export class Example2Component implements OnInit {
     this.http.get('assets/TopCities.json')
     .map( (data)=> {
       this.markers = data.json();
-    });
+    }).subscribe();
   }
-
 }
