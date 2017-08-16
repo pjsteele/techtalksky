@@ -35,6 +35,10 @@ export class Example3Component implements OnInit {
     this.loadGeoJson('assets/EclipseAndStates.geojson');
   }  
 
+  public loadPoints100(): void {
+    this.loadGeoJson('assets/points100.geojson');
+  }  
+
   private loadGeoJson(path: string): void {
     this.http.get(path)
     .map( (data)=> {
