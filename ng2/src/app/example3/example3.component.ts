@@ -17,7 +17,17 @@ export class Example3Component implements OnInit {
   geoJson: object;
 
   ngOnInit() {
-    this.http.get('assets/AllStates.geojson')
+  }
+
+  public clear(): void {
+    this.geoJson = null;
+  }
+  public loadStates(): void {
+    this.loadGeoJson('assets/AllStates.geojson');
+  }
+
+  private loadGeoJson(path: string): void {
+    this.http.get(path)
     .map( (data)=> {
       this.geoJson = data.json();
     }).subscribe();
