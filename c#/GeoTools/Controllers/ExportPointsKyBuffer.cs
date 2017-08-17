@@ -49,7 +49,7 @@ namespace GeoTools.Controllers
                     fc.Features.Add(feature);    
                 }
 
-                FileInfo fileInfo = new FileInfo("c:/temp//pointsKY100.geojson");
+                FileInfo fileInfo = new FileInfo("c:/temp//pointsKY.geojson");
                 StreamWriter writer = fileInfo.CreateText();
                 string json = JsonConvert.SerializeObject(fc);
                 writer.Write(json);
