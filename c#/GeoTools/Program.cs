@@ -19,7 +19,8 @@ namespace GeoTools
             //(new ExportEclipseAndStates()).run();
             //(new ExportAllStates()).run();
             //(new ExportPoints100()).run();
-            (new ExportEclipseCities()).run();
+            //(new ExportEclipseCities()).run();
+            (new ExportPointsKyBuffer()).run();
         }
     }
 }
