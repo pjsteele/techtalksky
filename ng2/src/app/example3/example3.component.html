@@ -2,9 +2,11 @@
   <div style="position:absolute; top:10px; left: 10px; z-index:200" >
     <button type="button" (click)="clear()">Clear</button>
     <button type="button" (click)="loadStates()">Load States</button>
+    <button type="button" (click)="loadPoints100()">Load 100 Miles</button>
+    <button type="button" (click)="loadPointsKY()">Load KY</button>
     <button type="button" (click)="loadEclipsePath()">Load Eclipse Path</button>
     <button type="button" (click)="loadEclipseStates()">Load Eclipse + States</button>
-    <button type="button" (click)="loadPoints100()">Load 100 Miles</button>
+    <button type="button" (click)="loadEclipseCities()">Load Eclipse + Cities</button>
   </div> 
   <agm-map [latitude]="centerLat" [longitude]="centerLng" [zoom]="centerZoom">
     <agm-data-layer [geoJson]="geoJson"></agm-data-layer>

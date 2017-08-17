@@ -27,6 +27,14 @@ export class Example3Component implements OnInit {
     this.loadGeoJson('assets/AllStates.geojson');
   }
 
+  public loadPoints100(): void {
+    this.loadGeoJson('assets/points100.geojson');
+  }  
+
+  public loadPointsKY(): void {
+    this.loadGeoJson('assets/pointsKY.geojson');
+  }  
+
   public loadEclipsePath(): void {
     this.loadGeoJson('assets/eclipse.geojson');
   }
@@ -35,9 +43,9 @@ export class Example3Component implements OnInit {
     this.loadGeoJson('assets/EclipseAndStates.geojson');
   }  
 
-  public loadPoints100(): void {
-    this.loadGeoJson('assets/points100.geojson');
-  }  
+  public loadEclipseCities() {
+    this.loadGeoJson('assets/eclipseCities.geojson');
+  }
 
   private loadGeoJson(path: string): void {
     this.http.get(path)
