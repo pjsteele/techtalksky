@@ -35,6 +35,9 @@ namespace GeoTools.Controllers
                         case "Polygon":
                             geometry = JsonConvert.DeserializeObject<Polygon>(row.json);
                             break;
+                        case "MultiPolygon":
+                            geometry = JsonConvert.DeserializeObject<MultiPolygon>(row.json);
+                            break;
                         default:
                             throw new Exception("Unexpected Geometry Type");
                     }
